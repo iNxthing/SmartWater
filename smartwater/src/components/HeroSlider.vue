@@ -32,7 +32,7 @@ export default {
         { src: 'https://static1.squarespace.com/static/521e95f4e4b01c5870ce81cf/t/55e6681fe4b05f924df365d8/1441163330952/?format=1500w', alt: 'Monitoreo agua' },
         { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH0rHBn1eJNmJ1IESmwJt3Rom31tz6Ie5ZhCwe9lfz-yxa1ib5n0eaab8&s=10', alt: 'Fugas' },
         { src: 'https://telemetrik.co/wp-content/uploads/2023/04/Sensores-de-nivel-e-IoT-la-clave-para-la-optimizacio%CC%81n-del-servicio-en-el-acueducto-de-Segovia-970x457.jpg', alt: 'Tanques' },
-        { src: '', alt: 'Dashboard' }
+        { src: 'https://i.pinimg.com/736x/37/f9/9e/37f99e422f151a5914f50d70673e9e3c.jpg', alt: 'Dashboard' }
       ]
     }
   },
