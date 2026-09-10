@@ -1,5 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import LoginForm from './components/LoginForm.vue';
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App).use(router).use(router);
+
+app.component("LoginForm",LoginForm);
+
+app.mount('#app');
+
+export{app};
