@@ -258,27 +258,42 @@ function showApp(username) {
     navigateTo('problematica');
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    $('#loginForm').onsubmit = (event) => {
-        event.preventDefault();
-        const username = $('#username').value.trim();
-        const password = $('#password').value.trim();
-        if (username !== credentials.username || password !== credentials.password) {
-            alert('Credenciales incorrectas. Prueba con admin / santamarta2026');
-            return;
-        }
-        sessionStorage.setItem('loggedIn', 'true');
-        sessionStorage.setItem('username', username);
-        showApp(username);
-    };
+// Login y sesión
+function login(event) {
+    event.preventDefault();
+    const username = $('#username').value.trim();
+    const password = $('#password').value.trim();
 
-    $('#logoutBtn').onclick = () => {
-        sessionStorage.clear();
-        showLogin();
-    };
+    if (username !== credentials.username || password !== credentials.password) {
+        alert('Credenciales incorrectas. Prueba con admin / santamarta2026');
+        return;
+    }
 
-    $$('.cat-btn').forEach((button) => button.onclick = () => navigateTo(button.dataset.section));
+    sessionStorage.setItem('loggedIn', 'true');
+    sessionStorage.setItem('username', username);
+    showApp(username);
+}
 
+function logout() {
+    sessionStorage.clear();
+    showLogin();
+}
+
+function restoreSession() {
     const username = sessionStorage.getItem('username') || 'Operador';
     sessionStorage.getItem('loggedIn') === 'true' ? showApp(username) : showLogin();
-});
+}
+
+// Eventos de la aplicación
+function setupEventListeners() {
+    $('#loginForm').onsubmit = login;
+    $('#logoutBtn').onclick = logout;
+    $$('.cat-btn').forEach((button) => button.onclick = () => navigateTo(button.dataset.section));
+}
+
+function initializeApp() {
+    setupEventListeners();
+    restoreSession();
+}
+
+window.addEventListener('DOMContentLoaded', initializeApp);

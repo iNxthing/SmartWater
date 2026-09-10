@@ -13,6 +13,7 @@
     --radius-card: 1.25rem;
 }
 
+/* Estilos base y reinicio */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -44,6 +45,7 @@ button:disabled {
     opacity: 0.6;
 }
 
+/* Pantalla de login */
 .login-container {
     width: 100%;
     max-width: 450px;
@@ -131,6 +133,7 @@ button:disabled {
     font-size: 0.8rem;
 }
 
+/* Estructura principal de la aplicación */
 .main-app {
     display: none;
     width: 100%;
@@ -141,6 +144,7 @@ button:disabled {
     box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
 }
 
+/* Encabezado y navegación */
 .app-header,
 .categories-nav,
 footer {
@@ -207,6 +211,7 @@ footer {
     color: white;
 }
 
+/* Contenido de las secciones */
 .content-pane {
     padding: 2rem;
     background: var(--color-background);
@@ -248,6 +253,7 @@ footer {
     margin-bottom: 0.5rem;
 }
 
+/* Botones pequeños y barras de progreso */
 .small-btn {
     margin-top: 0.7rem;
     padding: 0.45rem 1rem;
@@ -292,6 +298,7 @@ footer {
     display: block;
 }
 
+/* Seguimiento de objetivos */
 .objectives-list {
     display: grid;
     gap: 0.75rem;
@@ -326,6 +333,7 @@ footer {
     transition: width 0.25s ease;
 }
 
+/* FODA y requerimientos */
 .button-group {
     display: flex;
     flex-wrap: wrap;
@@ -345,6 +353,7 @@ footer {
     text-align: left;
 }
 
+/* Monitoreo IoT */
 .badge {
     padding: 0.2rem 0.8rem;
     border-radius: 1rem;
@@ -362,6 +371,7 @@ canvas {
     margin-top: 1.5rem;
 }
 
+/* Alertas y reportes */
 .danger-button {
     margin-top: 0.75rem;
     background: var(--color-danger);
@@ -394,6 +404,7 @@ canvas {
     white-space: pre-wrap;
 }
 
+/* Pie de página */
 footer {
     padding: 1rem;
     border-top: 1px solid var(--color-border);
@@ -402,6 +413,7 @@ footer {
     font-size: 0.8rem;
 }
 
+/* Diseño responsive */
 @media (max-width: 700px) {
     body {
         align-items: flex-start;
