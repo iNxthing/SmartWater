@@ -29,10 +29,10 @@ export default {
       currentSlide: 0,
       autoInterval: null,
       slides: [
-        { src: 'https://placehold.co/1300x460/1a6d5e/white?text=Monitoreo+de+Agua+Potable+en+Santa+Marta', alt: 'Monitoreo agua' },
-        { src: 'https://placehold.co/1300x460/26977f/white?text=Deteccion+de+Fugas+en+Tiempo+Real', alt: 'Fugas' },
-        { src: 'https://placehold.co/1300x460/32a28b/white?text=Sensores+IoT+en+Tanques', alt: 'Tanques' },
-        { src: 'https://placehold.co/1300x460/0c5f52/white?text=Plataforma+Inteligente+de+Agua', alt: 'Dashboard' }
+        { src: 'https://static1.squarespace.com/static/521e95f4e4b01c5870ce81cf/t/55e6681fe4b05f924df365d8/1441163330952/?format=1500w', alt: 'Monitoreo agua' },
+        { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH0rHBn1eJNmJ1IESmwJt3Rom31tz6Ie5ZhCwe9lfz-yxa1ib5n0eaab8&s=10', alt: 'Fugas' },
+        { src: 'https://telemetrik.co/wp-content/uploads/2023/04/Sensores-de-nivel-e-IoT-la-clave-para-la-optimizacio%CC%81n-del-servicio-en-el-acueducto-de-Segovia-970x457.jpg', alt: 'Tanques' },
+        { src: '', alt: 'Dashboard' }
       ]
     }
   },

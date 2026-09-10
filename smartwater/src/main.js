@@ -12,7 +12,12 @@ import GaleriaComponent from './components/GaleriaComponent.vue';
 import MisionComponent from './components/MisionComponent.vue';
 import MenuIoT from './components/MenuIoT.vue';
 
+// asi viene default createApp(App).use(router).mount('#app');
+// creamos una constante/variable donde se utilizen los metodos de router
+
 const app = createApp(App).use(router);
+
+// Crear las apps/componentes
 
 app.component("BuzonQuejas",BuzonQuejas);
 app.component("MenuIoT",MenuIoT);
@@ -24,6 +29,8 @@ app.component("NavBar",NavBar);
 app.component("QuienesSomos",QuienesSomos);
 app.component("UbicacionComponent",UbicacionComponent);
 app.component("LoginForm",LoginForm);
+
+// por ultimo llamamos a las apps/componentes que creamos
 
 app.mount('#app');
 

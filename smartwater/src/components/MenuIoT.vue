@@ -24,28 +24,28 @@ export default {
     return {
       cards: [
         {
-          img: 'https://placehold.co/400x200/2c9b82/white?text=Sensor+Presion',
+          img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxhyVaxGAP1M9qb9x19hEZcKHEwWHueBmHV4i0Cud6Jvh8JaYAx_YSeZU&s=10',
           alt: 'Presion agua',
           titulo: 'Monitoreo de Presion',
           descripcion: 'Medicion en tiempo real mediante sensores de presion. Detecta variaciones anormales y posibles fugas.',
           badge: 'Prioridad ALTA'
         },
         {
-          img: 'https://placehold.co/400x200/176b5b/white?text=Nivel+Tanques',
+          img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4fOKGXQOOsAirdZ4v6Ei26Gi2SgR1C8OgHf8WtEQ-HNxQt1BqXqBaUWs&s=10',
           alt: 'Nivel tanques',
           titulo: 'Nivel de Tanques',
           descripcion: 'Sensores de nivel ultrasonicos que actualizan automaticamente el volumen de almacenamiento.',
           badge: 'Control de abastecimiento'
         },
         {
-          img: 'https://placehold.co/400x200/47b392/white?text=Deteccion+Fugas',
+          img: 'https://www.esders.es/wp-content/uploads/2023/10/Wasserleck-Tracergas-TIB40-H2-Markus-1494x1040-1.jpg',
           alt: 'Fugas',
           titulo: 'Deteccion de Fugas',
           descripcion: 'Algoritmos que comparan flujo y presion; alertan ante fugas en la red de distribucion.',
           badge: 'Ahorro hidrico'
         },
         {
-          img: 'https://placehold.co/400x200/1f8a70/white?text=Alertas+Operador',
+          img: 'https://fotografias.lasexta.com/clipping/cmsimages02/2021/07/08/62A2683F-7D56-4DAC-A3F7-F87735DD973C/98.jpg?crop=1300,731,x0,y9&width=1900&height=1069&optimize=high&format=webply',
           alt: 'Alertas',
           titulo: 'Generacion de Alertas',
           descripcion: 'Notificaciones automaticas al personal tecnico via app y panel central.',

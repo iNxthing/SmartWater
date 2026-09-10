@@ -8,7 +8,10 @@
         :key="index"
         @click="mostrarInfo(item.alt)"
       >
-        <img :src="item.src" :alt="item.alt">
+        <img :src="item.src" :alt="item.alt"> 
+        <div class="image-overlay">
+          <span>{{ item.nombre }}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -20,12 +23,11 @@ export default {
   data() {
     return {
       items: [
-        { src: 'https://placehold.co/400x250/318f7a/white?text=Estacion+de+monitoreo', alt: 'Estacion monitoreo' },
-        { src: 'https://placehold.co/400x250/57b594/white?text=Sensor+de+caudal', alt: 'Sensor caudal' },
-        { src: 'https://placehold.co/400x250/1f6e5c/white?text=Panel+de+control+IoT', alt: 'Panel IoT' },
-        { src: 'https://placehold.co/400x250/399e86/white?text=Tanque+inteligente', alt: 'Tanque inteligente' },
-        { src: 'https://placehold.co/400x250/4cae94/white?text=Comunicacion+LoRa', alt: 'Comunicacion IoT' },
-        { src: 'https://placehold.co/400x250/269c7c/white?text=Dron+supervision', alt: 'Supervision tecnica' }
+        { src: 'https://www.tecpi.com.co/wp-content/uploads/2024/10/planta-aguas-tunja-veolia-tecpi-jpg.webp', alt: 'Estacion monitoreo', nombre: 'Estacion de monitoreo' },
+        { src: 'https://medicionycontrol.com.co/wp-content/uploads/2022/11/Medidor-de-Flujo-tipos-y-caracteristicas-Medicion-y-Control.jpg', alt: 'Sensor caudal', nombre: 'Sensor de caudal' },
+        { src: 'https://telemetrik.co/wp-content/uploads/2023/02/Monitoreo-del-nivel-del-agua-en-tiempo-real-con-tecnologi%CC%81a-IoT-Tablero-720x478.jpg', alt: 'Panel IoT', nombre: 'Panel de control IoT' },
+        { src: 'https://www.vanguardia.com/resizer/v2/oygukygfiu858257420230803172821jpg-WI7HRQMV7JHURPWWZOGHLYAQII.jpg?auth=533a63ad7d18f18038651678c61e1f2dc663e6f4b08791099d70d543d9e7f105&smart=true&width=1200&height=800&quality=70', alt: 'Tanque inteligente', nombre: 'Tanque inteligente' },
+        { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10', alt: 'Supervision tecnica', nombre: 'Supervision tecnica' }
       ]
     }
   },
@@ -59,6 +61,29 @@ export default {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.image-overlay span {
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.gallery-item:hover .image-overlay {
+  background: rgba(0, 0, 0, 0.48);
 }
 
 .gallery-item:hover img {
