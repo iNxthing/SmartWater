@@ -8,6 +8,7 @@
             <GaleriaComponent />
             <UbicacionComponent />
             <BuzonQuejas />
+            <MostrarSugerencia />
             <MisionComponent />
         </main>
     <FooterBar />

@@ -19,7 +19,7 @@
           <textarea id="queja" v-model="queja" rows="5" required placeholder="Describa detalladamente el problema que presenta con el suministro de agua, fugas detectadas, presion baja, etc."></textarea>
         </div>
         <div class="form-group">
-          <button type="submit">Enviar queja</button>
+          <button type="submit" :disabled="enviando">{{ enviando ? 'Enviando...' : 'Enviar queja' }}</button>
           <button type="button" @click="limpiarForm">Limpiar formulario</button>
         </div>
       </form>
@@ -37,7 +37,8 @@ export default {
       correo: '',
       queja: '',
       mensaje: '',
-      tipoMensaje: ''
+      tipoMensaje: '',
+      enviando: false
     }
   },
   methods: {
@@ -72,22 +73,34 @@ export default {
         return
       }
 
-      console.log('Queja registrada:')
-      console.log('Nombre:', this.nombre)
-      console.log('Correo:', this.correo)
-      console.log('Queja:', this.queja)
+      this.enviando = true;
+      this.axios
+      .post('http://127.0.0.1:8000/guardarSugerencia', {
+        nombre: this.nombre,
+        correo: this.correo,
+        queja: this.queja
+      })
+      .then(response => {
+        this.mensaje = response.data.Mensaje
+        this.tipoMensaje = 'exito'
 
-      this.mensaje = 'Gracias ' + this.nombre + ', su queja ha sido registrada exitosamente. Nuestro equipo la revisara y le respondera a la brevedad.'
-      this.tipoMensaje = 'exito'
+        this.nombre = ''
+        this.correo = ''
+        this.queja = ''
 
-      this.nombre = ''
-      this.correo = ''
-      this.queja = ''
-
-      setTimeout(() => {
-        this.mensaje = ''
-        this.tipoMensaje = ''
-      }, 5000)
+        setTimeout(() => {
+          this.mensaje = ''
+          this.tipoMensaje = ''
+        }, 5000)
+      })
+      .catch(err => {
+        console.error('Error al enviar la queja:', err)
+        this.mensaje = 'No fue posible registrar su queja en este momento. Intentelo de nuevo.'
+        this.tipoMensaje = 'error'
+      })
+      .finally(() => {
+        this.enviando = false
+      })
     },
     limpiarForm() {
       this.nombre = ''

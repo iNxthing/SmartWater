@@ -10,7 +10,7 @@
           :src="slide.src"
           :alt="slide.alt"
         >
-        <div class="image-overlay">
+        <div class="image-overlay" v-if="slides.length">
           <span>{{ slides[currentSlide].nombre }}</span>
         </div>
         <button class="slider-btn btn-prev" @click="prev">&#10094;</button>
@@ -31,12 +31,8 @@ export default {
     return {
       currentSlide: 0,
       autoInterval: null,
-      slides: [
-        { src: 'https://static1.squarespace.com/static/521e95f4e4b01c5870ce81cf/t/55e6681fe4b05f924df365d8/1441163330952/?format=1500w', alt: 'Monitoreo agua', nombre: 'Monitoreo de agua' },
-        { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10', alt: 'Fugas', nombre: 'Detección de fugas' },
-        { src: 'https://telemetrik.co/wp-content/uploads/2023/04/Sensores-de-nivel-e-IoT-la-clave-para-la-optimizacio%CC%81n-del-servicio-en-el-acueducto-de-Segovia-970x457.jpg', alt: 'Tanques', nombre: 'Monitoreo de tanques' },
-        { src: 'https://i.pinimg.com/736x/37/f9/9e/37f99e422f151a5914f50d70673e9e3c.jpg', alt: 'Dashboard', nombre: 'Panel de control' }
-      ]
+      slides: [],
+      loadingImages : false,
     }
   },
   mounted() {
@@ -46,6 +42,26 @@ export default {
     this.clearSlider()
   },
   methods: {
+    getAllImages: function (){
+      this.loadingImages = true;
+      this.axios
+      .get('http://127.0.0.1:8000/ImagenesSlider')
+      .then(response => {
+        this.slides = response.data.respuesta ?? [];
+        console.log(this.slides);
+      })
+      .catch(err => {
+        console.error('Error al cargar las imágenes del slider:', err)
+        this.slides = []
+      })
+      .finally(()=> {
+        this.loadingImages = false;
+      });
+    },
+
+
+
+
     startSlider() {
       this.autoInterval = setInterval(() => this.next(), 5500)
     },
@@ -59,11 +75,16 @@ export default {
       this.startSlider()
     },
     next() {
+      if (!this.slides.length) return
       this.currentSlide = (this.currentSlide + 1) % this.slides.length
     },
     prev() {
+      if (!this.slides.length) return
       this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length
     }
+  },
+  created(){
+    this.getAllImages();
   }
 }
 </script>
