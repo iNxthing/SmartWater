@@ -1,9 +1,9 @@
 <template>
-    <article v-show="loadingImages == true" class="slider-container">
-      <SkeletonPrime height="14rem"></SkeletonPrime>
-      <SkeletonPrime height="14rem"></SkeletonPrime>
-      <SkeletonPrime height="14rem"></SkeletonPrime>
-    </article>
+  <article v-show="loadingImages == true" class="slider-container">
+    <SkeletonPrime height="14rem"></SkeletonPrime>
+    <SkeletonPrime height="14rem"></SkeletonPrime>
+    <SkeletonPrime height="14rem"></SkeletonPrime>
+  </article>
   <section id="inicio" v-show="loadingImages == false">
     <div class="hero-slider">
       <div class="slider-container" @mouseenter="pauseSlider" @mouseleave="resumeSlider">
@@ -55,8 +55,8 @@ export default {
         this.slides = response.data.respuesta ?? [];
         console.log(this.slides);
       })
-      .catch(err => {
-        console.error('Error al cargar las imágenes del slider:', err)
+      .catch(e => {
+        console.error('Error al cargar las imágenes del slider:', e)
         this.slides = []
       })
       .finally(()=> {

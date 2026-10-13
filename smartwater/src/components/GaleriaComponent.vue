@@ -1,5 +1,10 @@
 <template>
-  <section id="galeria">
+    <article v-show="loadingImages == true" class="slider-container">
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+    </article>
+  <section id="galeria" v-show="loadingImages == false">
     <h2 class="section-title">Infraestructura y sensores en campo</h2>
     <div class="gallery-grid">
       <div
@@ -33,6 +38,15 @@ export default {
         .then(response => {
           this.items = response.data.respuesta ?? [];
           console.log(this.items);
+        })
+        .catch(e => {
+          console.error('Error al cargar las imagenes de la galeria',e)
+          this.items = []
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.loadingImages = false;
+          }, 2000)
         })
     }, 
     mostrarInfo(alt) {

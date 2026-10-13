@@ -1,5 +1,10 @@
 <template>
-  <section id="menu">
+  <article v-show="loadingIOT == true" class="card-content">
+    <SkeletonPrime height="8rem"></SkeletonPrime>
+    <SkeletonPrime height="8rem"></SkeletonPrime>
+    <SkeletonPrime height="8rem"></SkeletonPrime>
+  </article>
+  <section id="menu" v-show="loadingIOT == false">
     <h2 class="section-title">Menu de Funcionalidades IoT</h2>
     <div class="cards-container">
       <div class="card" v-for="(card, index) in cards" :key="index">
@@ -34,6 +39,15 @@ export default {
           this.cards = response.data.respuesta ?? [];
           console.log(this.cards);
         })
+        .catch(e => {
+        console.error('Error al cargar las imagenes del menu IOT',e)
+        this.cards = []
+      })
+        .finally(()=> {
+          setTimeout(()=> {
+            this.loadingIOT = false;
+          }, 2000);
+        });
     },
     mostrarInfo() {
       alert('El sistema SmartWater integra sensores de presion, caudal y nivel, conectados a una plataforma cloud. Genera reportes historicos, alertas por fugas y dashboard para operadores. Proyecto alineado con ODS 6 - Agua limpia y saneamiento.')
