@@ -57,7 +57,7 @@ export default {
 .login {
     width: 100%;
     max-width: 450px;
-    background: white;
+    background: #0d1f1a;
     border-radius: 2rem;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
@@ -83,7 +83,7 @@ export default {
 .grupo label {
     display: block;
     margin-bottom: 0.45rem;
-    color: #5f7180;
+    color: #ffffff;
     font-size: 0.9rem;
 }
 
@@ -93,12 +93,12 @@ export default {
     padding: 0.85rem 1rem;
     border: 1px solid #cfdfe9;
     border-radius: 1rem;
-    background: white;
+    background: #0d1f1a;
 }
 
 .grupo input:focus {
     outline: 2px solid #e0f2e9;
-    border-color: #0f6b4c;
+    border-color: #4ade9f;
 }
 
 .boton {
@@ -106,28 +106,28 @@ export default {
     padding: 0.9rem;
     border: 0;
     border-radius: 2rem;
-    background: #0f6b4c;
+    background: #4ade9f;
     color: white;
     cursor: pointer;
     font-weight: 700;
 }
 
 .boton:hover {
-    background: #0a533b;
+    background: #3ddc9a;
 }
 
 .datos {
     margin-top: 1rem;
     padding: 0.8rem;
     border-radius: 1rem;
-    background: #f8fafc;
+    background: #0d1f1a;
     text-align: center;
     font-size: 0.8rem;
 }
 
 .error {
     margin-top: 0.75rem;
-    color: #c0392b;
+    color: #ff8a94;
     font-size: 0.9rem;
     text-align: center;
 }

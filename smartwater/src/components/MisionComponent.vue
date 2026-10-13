@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .mision-container {
-  background: white;
+  background: #0d1f1a;
   border-radius: 28px;
   padding: 2rem;
   box-shadow: 0 12px 24px rgba(0,0,0,0.05);

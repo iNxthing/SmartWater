@@ -12,6 +12,12 @@ import UbicacionComponent from './components/UbicacionComponent.vue';
 import GaleriaComponent from './components/GaleriaComponent.vue';
 import MisionComponent from './components/MisionComponent.vue';
 import MenuIoT from './components/MenuIoT.vue';
+
+import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
+import Skeleton from 'primevue/skeleton';
+
+
 import axios from 'axios';
 
 import VueAxios from 'vue-axios';
@@ -20,6 +26,13 @@ import VueAxios from 'vue-axios';
 const app = createApp(App).use(router);
 
 app.use(VueAxios, axios);
+
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura
+    },
+    license: 'PRIMEUI-LICENSE-KEY'
+});
 
 
 app.component("BuzonQuejas",BuzonQuejas);
@@ -33,6 +46,7 @@ app.component("NavBar",NavBar);
 app.component("QuienesSomos",QuienesSomos);
 app.component("UbicacionComponent",UbicacionComponent);
 app.component("LoginForm",LoginForm);
+app.component("SkeletonPrime", Skeleton);
 
 
 

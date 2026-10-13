@@ -32,7 +32,7 @@ export default {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #f0f7f4;
+    background: #000000;
 }
 
 .container main {

@@ -93,14 +93,14 @@
   min-width: 1.6rem;
   padding: 0.1rem 0.5rem;
   border-radius: 40px;
-  background: #e8f5f0;
-  color: #0e5e4f;
+  background: #0d1f1a;
+  color: #5fe3b0;
   font-size: 0.85rem;
   text-align: center;
 }
 
 .panel {
-  background: white;
+  background: #0d1f1a;
   border-radius: 28px;
   padding: 2rem;
   box-shadow: 0 12px 24px rgba(0,0,0,0.05);
@@ -109,17 +109,17 @@
 }
 
 .panel-vacio {
-  color: #0e5e4f;
+  color: #5fe3b0;
   font-weight: 500;
   text-align: center;
   padding: 1rem;
-  background: #e8f5f0;
+  background: #0d1f1a;
   border-radius: 16px;
 }
 
 .panel-vacio.error {
-  background: #f8d7da;
-  color: #721c24;
+  background: #3d1518;
+  color: #ff9aa5;
 }
 
 .lista-sugerencias {
@@ -136,7 +136,7 @@
   border: 1px solid #c8e0d8;
   border-left: 4px solid #2c9b82;
   border-radius: 12px;
-  background: #fefefe;
+  background: #12261f;
 }
 
 .item-header {
@@ -148,11 +148,11 @@
 }
 
 .item-header strong {
-  color: #0a5b4b;
+  color: #5fe3b0;
 }
 
 .fecha {
-  color: #7f8c8d;
+  color: #ffffff;
   font-size: 0.85rem;
 }
 
@@ -170,7 +170,7 @@
 
 .queja {
   margin: 0;
-  color: #1a3b2f;
+  color: #ffffff;
   white-space: pre-line;
 }
 

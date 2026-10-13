@@ -54,7 +54,7 @@ export default {
 }
 
 .card {
-  background: white;
+  background: #0d1f1a;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -77,18 +77,18 @@ export default {
 }
 
 .card-content h3 {
-  color: #0a5b4b;
+  color: #5fe3b0;
   margin-bottom: 0.5rem;
 }
 
 .badge {
   display: inline-block;
-  background: #e0f2e9;
+  background: #12261f;
   padding: 0.2rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #0b6e5b;
+  color: #4ade9f;
   margin-top: 12px;
 }
 

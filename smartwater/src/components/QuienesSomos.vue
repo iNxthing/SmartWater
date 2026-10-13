@@ -52,7 +52,7 @@ export default {
 }
 
 .tag-iot {
-  background: #eef7f3;
+  background: #0d1f1a;
   padding: 0.2rem 0.8rem;
   border-radius: 30px;
   font-size: 0.75rem;

@@ -1,5 +1,10 @@
 <template>
-  <section id="inicio">
+    <article v-show="loadingImages == true" class="slider-container">
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+      <SkeletonPrime height="14rem"></SkeletonPrime>
+    </article>
+  <section id="inicio" v-show="loadingImages == false">
     <div class="hero-slider">
       <div class="slider-container" @mouseenter="pauseSlider" @mouseleave="resumeSlider">
         <img
@@ -55,7 +60,9 @@ export default {
         this.slides = []
       })
       .finally(()=> {
+      setTimeout(() => {
         this.loadingImages = false;
+        }, 2000);
       });
     },
 
@@ -135,7 +142,7 @@ export default {
 }
 
 .slider-btn:hover {
-  background: #0e5e4f;
+  background: #5fe3b0;
 }
 
 .btn-prev {
@@ -152,7 +159,7 @@ export default {
 }
 
 .hero-text h2 {
-  color: #0a5b4b;
+  color: #5fe3b0;
 }
 
 .image-overlay {

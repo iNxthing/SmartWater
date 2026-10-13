@@ -14,8 +14,8 @@
 }
 
 body {
-  background: #f0f7f4;
-  color: #1a3b2f;
+  background: #000000;
+  color: #ffffff;
   line-height: 1.5;
 }
 
@@ -46,7 +46,7 @@ body {
   margin-bottom: 2rem;
   padding-bottom: 0.5rem;
   border-bottom: 3px solid #2c9b82;
-  color: #0e5e4f;
+  color: #5fe3b0;
   font-size: 2rem;
   text-align: center;
 }
@@ -63,7 +63,7 @@ body {
 }
 
 .container button:hover {
-  background: #1c6b5a;
+  background: #3ddc9a;
 }
 
 @media (max-width: 780px) {

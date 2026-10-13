@@ -115,7 +115,7 @@ export default {
 
 <style scoped>
 .quejas-container {
-  background: white;
+  background: #0d1f1a;
   border-radius: 28px;
   padding: 2rem;
   box-shadow: 0 12px 24px rgba(0,0,0,0.05);
@@ -127,12 +127,12 @@ export default {
   text-align: center;
   margin-bottom: 2rem;
   padding: 1rem;
-  background: #e8f5f0;
+  background: #0d1f1a;
   border-radius: 16px;
 }
 
 .quejas-info p {
-  color: #0e5e4f;
+  color: #5fe3b0;
   font-weight: 500;
 }
 
@@ -150,7 +150,7 @@ export default {
 
 .form-group label {
   font-weight: bold;
-  color: #0a5b4b;
+  color: #5fe3b0;
 }
 
 .form-group input,
@@ -160,13 +160,13 @@ export default {
   border-radius: 12px;
   font-size: 1rem;
   transition: 0.2s;
-  background: #fefefe;
+  background: #12261f;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #2c9b82;
+  border-color: #5fe3b0;
   box-shadow: 0 0 0 3px rgba(44, 155, 130, 0.2);
 }
 
@@ -197,14 +197,14 @@ export default {
 }
 
 .mensaje-queja.exito {
-  background: #d4edda;
-  color: #155724;
+  background: #10331d;
+  color: #7ee2a8;
   border: 1px solid #c3e6cb;
 }
 
 .mensaje-queja.error {
-  background: #f8d7da;
-  color: #721c24;
+  background: #3d1518;
+  color: #ff9aa5;
   border: 1px solid #f5c6cb;
 }
 

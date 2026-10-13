@@ -51,7 +51,7 @@ export default {
 
 .info-contacto {
   flex: 0.9;
-  background: white;
+  background: #0d1f1a;
   padding: 1.6rem;
   border-radius: 24px;
   box-shadow: 0 8px 18px rgba(0,0,0,0.05);
@@ -60,7 +60,7 @@ export default {
 .info-contacto h3 {
   margin-top: 1rem;
   margin-bottom: 0.3rem;
-  color: #0e5e4f;
+  color: #5fe3b0;
 }
 
 .info-contacto h3:first-of-type {
