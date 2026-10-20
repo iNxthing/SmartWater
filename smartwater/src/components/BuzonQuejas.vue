@@ -46,7 +46,7 @@ export default {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       return regex.test(email)
     },
-    enviarQueja() {
+    enviarQueja: async function() {
       if (this.nombre.trim() === '') {
         this.mensaje = 'Por favor, ingrese su nombre completo.'
         this.tipoMensaje = 'error'
@@ -74,8 +74,8 @@ export default {
       }
 
       this.enviando = true;
-      this.axios
-      .post('http://127.0.0.1:8000/guardarSugerencia', {
+      await this.axios
+      .post('https://apismartwater.onrender.com/guardarSugerencia', {
         nombre: this.nombre,
         correo: this.correo,
         queja: this.queja

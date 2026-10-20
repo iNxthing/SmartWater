@@ -47,10 +47,10 @@ export default {
     this.clearSlider()
   },
   methods: {
-    getAllImages: function (){
+    getAllImages: async function (){
       this.loadingImages = true;
-      this.axios
-      .get('http://127.0.0.1:8000/ImagenesSlider')
+      await this.axios 
+      .get('https://apismartwater.onrender.com/ImagenesSlider')
       .then(response => {
         this.slides = response.data.respuesta ?? [];
         console.log(this.slides);

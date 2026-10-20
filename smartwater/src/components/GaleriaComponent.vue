@@ -32,9 +32,9 @@ export default {
     }
   },
   methods: {
-    getAllImages: function(){
+    getAllImages: async function(){
       this.loadingImages = true;
-      this.axios.get('http://127.0.0.1:8000/ImagenesGaleria')
+      await this.axios.get('https://apismartwater.onrender.com/ImagenesGaleria')
         .then(response => {
           this.items = response.data.respuesta ?? [];
           console.log(this.items);

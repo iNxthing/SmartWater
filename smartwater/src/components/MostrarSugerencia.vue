@@ -46,11 +46,11 @@
           this.getAllSugerencias()
         }
       },
-      getAllSugerencias() {
+      getAllSugerencias: async function() {
         this.cargando = true;
         this.error = '';
-        this.axios
-        .get('http://127.0.0.1:8000/obtenerSugerencias')
+        await this.axios
+        .get('https://apismartwater.onrender.com/obtenerSugerencias')
         .then(response => {
           this.sugerencias = response.data.respuesta ?? [];
         })

@@ -32,9 +32,10 @@ export default {
     }
   },
   methods: {
-    getAllImages: function(){
+    getAllImages: async function(){
+
       this.loadingIOT = true;
-      this.axios.get('http://127.0.0.1:8000/ImagenesIOT')
+      await this.axios.get('https://apismartwater.onrender.com/ImagenesIOT')
         .then(response => {
           this.cards = response.data.respuesta ?? [];
           console.log(this.cards);
