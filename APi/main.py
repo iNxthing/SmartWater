@@ -1,11 +1,25 @@
-from datetime import datetime
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware 
+import hmac
+import os
+from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
+
+import jwt
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    get_auth_settings()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 sugerencias = []
+
 
 class sugerencia(BaseModel):
     nombre: str
@@ -13,19 +27,126 @@ class sugerencia(BaseModel):
     queja: str
 
 
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+TOKEN_LIFETIME_MINUTES = 60
+bearer_scheme = HTTPBearer(auto_error=False)
+
+
+def get_auth_settings() -> tuple[str, str, str]:
+    username = os.getenv("SMARTWATER_USERNAME")
+    password = os.getenv("SMARTWATER_PASSWORD")
+    secret_key = os.getenv("JWT_SECRET_KEY")
+    if not username or not password or not secret_key:
+        missing = [
+            name
+            for name, value in (
+                ("SMARTWATER_USERNAME", username),
+                ("SMARTWATER_PASSWORD", password),
+                ("JWT_SECRET_KEY", secret_key),
+            )
+            if not value
+        ]
+        raise RuntimeError(
+            "Missing required authentication environment variables: "
+            + ", ".join(missing)
+        )
+    if len(secret_key.encode("utf-8")) < 32:
+        raise RuntimeError("JWT_SECRET_KEY must contain at least 32 bytes")
+    return username, password, secret_key
+
+
+def require_valid_token(
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+):
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Bearer token required",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    username, _, secret_key = get_auth_settings()
+    try:
+        payload = jwt.decode(
+            credentials.credentials,
+            secret_key,
+            algorithms=["HS256"],
+            options={"require": ["exp", "sub"]},
+        )
+    except jwt.InvalidTokenError as error:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+            headers={"WWW-Authenticate": "Bearer"},
+        ) from error
+
+    if payload["sub"] != username:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return payload["sub"]
+
+
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "SMARTWATER_ALLOWED_ORIGINS", "http://localhost:8080"
+    ).split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=allowed_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+
 
 @app.get("/")
 def home():
     return {
-        "Mensaje":"Hola"
+        "Mensaje": "Hola"
     }
+
+
+@app.post("/login")
+def login(datos: LoginRequest):
+    username, password, secret_key = get_auth_settings()
+    valid_username = hmac.compare_digest(
+        datos.username.encode("utf-8"), username.encode("utf-8")
+    )
+    valid_password = hmac.compare_digest(
+        datos.password.encode("utf-8"), password.encode("utf-8")
+    )
+    if not (valid_username and valid_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales incorrectas",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    expires_in = TOKEN_LIFETIME_MINUTES * 60
+    expires_at = datetime.now(timezone.utc) + timedelta(seconds=expires_in)
+    access_token = jwt.encode(
+        {"sub": username, "exp": expires_at},
+        secret_key,
+        algorithm="HS256",
+    )
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": expires_in,
+    }
+
 
 @app.get("/ImagenesSlider")
 def imagenes_slider():
@@ -127,7 +248,9 @@ def imagenes_iot():
     }
 
 @app.post("/guardarSugerencia")
-def guardar_sugerencia(datos: sugerencia):
+def guardar_sugerencia(
+    datos: sugerencia, _: str = Depends(require_valid_token)
+):
     nueva = {
         "id": len(sugerencias) + 1,
         "nombre": datos.nombre,
@@ -142,5 +265,5 @@ def guardar_sugerencia(datos: sugerencia):
     }
 
 @app.get("/obtenerSugerencias")
-def obtener_sugerencias():
+def obtener_sugerencias(_: str = Depends(require_valid_token)):
     return {"respuesta": sugerencias}

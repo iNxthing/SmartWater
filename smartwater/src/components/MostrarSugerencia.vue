@@ -50,12 +50,19 @@
         this.cargando = true;
         this.error = '';
         await this.axios
-        .get('https://apismartwater.onrender.com/obtenerSugerencias')
+        .get('https://apismartwater.onrender.com/obtenerSugerencias', {
+          headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+        })
         .then(response => {
           this.sugerencias = response.data.respuesta ?? [];
         })
         .catch(err => {
-          console.error('Error al cargar las sugerencias:', err)
+          if (err.response?.status === 401) {
+            localStorage.removeItem('token')
+            this.$router.push('/')
+            return
+          }
+          console.error('Error al cargar las sugerencias:', err.message)
           this.sugerencias = []
           this.error = 'No fue posible cargar las sugerencias en este momento.'
         })

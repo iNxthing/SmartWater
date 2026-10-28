@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import API_BASE_URL from '../api'
+
 export default {
   name: 'GaleriaComponent',
   data() {
@@ -34,7 +36,7 @@ export default {
   methods: {
     getAllImages: async function(){
       this.loadingImages = true;
-      await this.axios.get('https://apismartwater.onrender.com/ImagenesGaleria')
+      await this.axios.get(`${API_BASE_URL}/ImagenesGaleria`)
         .then(response => {
           this.items = response.data.respuesta ?? [];
           console.log(this.items);

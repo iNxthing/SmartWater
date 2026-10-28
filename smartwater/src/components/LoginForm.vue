@@ -18,14 +18,11 @@
             <button class="boton" type="submit">Ingresar</button>
         </form>
         <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-        <div class="datos"> Usuario: <strong>admin</strong> / Contraseña: <strong>santamarta2026</strong></div>
     </div>
   </main>
 </template>
 
 <script>
-
-
 export default {
     data() {
         return {
@@ -36,14 +33,24 @@ export default {
     },
     methods: {
         login() {
-            if (this.username === 'admin' && this.password === 'santamarta2026') {
-                this.errorMessage = '';
-                alert('Inicio de sesión correcto');
-                this.$router.push({ name: 'SmartWater' });
-                
-            } else {
-                this.errorMessage = 'Credenciales incorrectas. Prueba con admin / santamarta2026';
-            }
+            this.axios.post('https://apismartwater.onrender.com/login', {
+                username: this.username,
+                password: this.password
+            }).then(response => {
+                if (response.data.access_token) {
+                    localStorage.setItem('token', response.data.access_token);
+                    this.$router.push('/smartwater');
+                } else {
+                    this.errorMessage = 'No fue posible iniciar sesion.';
+                }
+            }).catch(error => {
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.errorMessage = 'Credenciales incorrectas.';
+                } else {
+                    this.errorMessage = 'No fue posible iniciar sesion. Intentelo de nuevo.';
+                }
+            });
         },
     },
 };
@@ -114,15 +121,6 @@ export default {
 
 .boton:hover {
     background: #3ddc9a;
-}
-
-.datos {
-    margin-top: 1rem;
-    padding: 0.8rem;
-    border-radius: 1rem;
-    background: #0d1f1a;
-    text-align: center;
-    font-size: 0.8rem;
 }
 
 .error {

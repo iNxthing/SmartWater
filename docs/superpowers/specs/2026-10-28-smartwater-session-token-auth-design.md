@@ -20,16 +20,15 @@ Replace the frontend-only demo login with server-validated sessions following th
 
 ## Frontend design
 
-- Configure one API base URL using `VUE_APP_API_URL`, defaulting to the current `https://apismartwater.onrender.com` API origin.
-- Change `LoginForm.vue` to post credentials to `/login`. On success, store `access_token` under the `token` key in `localStorage` (matching the professor's example) and navigate to `/smartwater`. On failed login, show an error and do not navigate. Remove the hard-coded credentials and visible demo credential hint.
-- Attach `Authorization: Bearer <token>` to both suggestion requests: submission in `BuzonQuejas.vue` and retrieval in `MostrarSugerencia.vue`.
+- Change `LoginForm.vue` to post credentials to `https://apismartwater.onrender.com/login`. On success, store `access_token` under the `token` key in `localStorage` (matching the professor's example) and navigate to `/smartwater`. On failed login, show an error and do not navigate. Remove the hard-coded credentials and visible demo credential hint.
+- Attach `Authorization: 'Bearer ' + localStorage.getItem('token')` to both suggestion requests: submission in `BuzonQuejas.vue` and retrieval in `MostrarSugerencia.vue`, matching the professor's Axios options pattern.
 - If either protected request receives 401, remove the stored token and return to `/`. Keep the existing suggestion form validation and user-facing success/error messages.
 
 ## Configuration and dependencies
 
 - Add PyJWT to `APi/requirements.txt`; do not add real credentials or signing keys to source control.
 - Configure `SMARTWATER_USERNAME`, `SMARTWATER_PASSWORD`, `JWT_SECRET_KEY`, and `SMARTWATER_ALLOWED_ORIGINS` in the API deployment environment. Generate a strong signing key outside the repository. Local development uses a local-only credential and key in the shell environment.
-- Configure `VUE_APP_API_URL` only when the frontend needs to use a non-default API origin.
+- Image/content requests continue using the shared API base URL helper; authentication and suggestion requests use the deployed API URL directly as in the example.
 
 ## Validation
 

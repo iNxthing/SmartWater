@@ -76,10 +76,12 @@ export default {
       this.enviando = true;
       await this.axios
       .post('https://apismartwater.onrender.com/guardarSugerencia', {
-        nombre: this.nombre,
-        correo: this.correo,
-        queja: this.queja
-      })
+          nombre: this.nombre,
+          correo: this.correo,
+          queja: this.queja
+        }, {
+          headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+        })
       .then(response => {
         this.mensaje = response.data.Mensaje
         this.tipoMensaje = 'exito'
@@ -94,7 +96,12 @@ export default {
         }, 5000)
       })
       .catch(err => {
-        console.error('Error al enviar la queja:', err)
+        if (err.response?.status === 401) {
+          localStorage.removeItem('token')
+          this.$router.push('/')
+          return
+        }
+        console.error('Error al enviar la queja:', err.message)
         this.mensaje = 'No fue posible registrar su queja en este momento. Intentelo de nuevo.'
         this.tipoMensaje = 'error'
       })
