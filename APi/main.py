@@ -31,10 +31,26 @@ def home():
 def imagenes_slider():
     respuesta = [
 
-        { "src": "https://static1.squarespace.com/static/521e95f4e4b01c5870ce81cf/t/55e6681fe4b05f924df365d8/1441163330952/?format=1500w", "alt": "Monitoreo agua", "nombre": "Monitoreo de agua" },
-        { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10", "alt": "Fugas", "nombre": "Detección de fugas" },
-        { "src": "https://telemetrik.co/wp-content/uploads/2023/04/Sensores-de-nivel-e-IoT-la-clave-para-la-optimizacio%CC%81n-del-servicio-en-el-acueducto-de-Segovia-970x457.jpg", "alt": "Tanques", "nombre": "Monitoreo de tanques" },
-        { "src": "https://i.pinimg.com/736x/37/f9/9e/37f99e422f151a5914f50d70673e9e3c.jpg", "alt": "Dashboard", "nombre": "Panel de control" }
+        { 
+            "src": "https://static1.squarespace.com/static/521e95f4e4b01c5870ce81cf/t/55e6681fe4b05f924df365d8/1441163330952/?format=1500w",
+            "alt": "Monitoreo agua",
+            "nombre": "Monitoreo de agua" 
+        },
+        { 
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10",
+            "alt": "Fugas",
+            "nombre": "Detección de fugas" 
+        },
+        { 
+            "src": "https://telemetrik.co/wp-content/uploads/2023/04/Sensores-de-nivel-e-IoT-la-clave-para-la-optimizacio%CC%81n-del-servicio-en-el-acueducto-de-Segovia-970x457.jpg",
+            "alt": "Tanques",
+            "nombre": "Monitoreo de tanques" 
+        },
+        { 
+            "src": "https://i.pinimg.com/736x/37/f9/9e/37f99e422f151a5914f50d70673e9e3c.jpg",
+            "alt": "Dashboard",
+            "nombre": "Panel de control" 
+        }
         
     ]
     return {"respuesta": respuesta}
@@ -44,11 +60,31 @@ def imagenes_slider():
 def imagenes_galeria():
     respuesta = [
         
-        { "src": "https://www.tecpi.com.co/wp-content/uploads/2024/10/planta-aguas-tunja-veolia-tecpi-jpg.webp", "alt": "Estacion monitoreo", "nombre": "Estacion de monitoreo" },
-        { "src": "https://medicionycontrol.com.co/wp-content/uploads/2022/11/Medidor-de-Flujo-tipos-y-caracteristicas-Medicion-y-Control.jpg", "alt": "Sensor caudal", "nombre": "Sensor de caudal"  },
-        { "src": "https://telemetrik.co/wp-content/uploads/2023/02/Monitoreo-del-nivel-del-agua-en-tiempo-real-con-tecnologi%CC%81a-IoT-Tablero-720x478.jpg", "alt": "Panel IoT", "nombre": "Panel de control IoT" },
-        { "src": "https://www.vanguardia.com/resizer/v2/oygukygfiu858257420230803172821jpg-WI7HRQMV7JHURPWWZOGHLYAQII.jpg?auth=533a63ad7d18f18038651678c61e1f2dc663e6f4b08791099d70d543d9e7f105&smart=true&width=1200&height=800&quality=70", "alt": "Tanque inteligente", "nombre": "Tanque inteligente" },
-        { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10", "alt": "Supervision tecnica", "nombre": "Supervision tecnica" }
+        { 
+            "src": "https://www.tecpi.com.co/wp-content/uploads/2024/10/planta-aguas-tunja-veolia-tecpi-jpg.webp",
+            "alt": "Estacion monitoreo",
+            "nombre": "Estacion de monitoreo" 
+        },
+        {   
+            "src": "https://medicionycontrol.com.co/wp-content/uploads/2022/11/Medidor-de-Flujo-tipos-y-caracteristicas-Medicion-y-Control.jpg",
+            "alt": "Sensor caudal",
+            "nombre": "Sensor de caudal"  
+        },
+        { 
+            "src": "https://telemetrik.co/wp-content/uploads/2023/02/Monitoreo-del-nivel-del-agua-en-tiempo-real-con-tecnologi%CC%81a-IoT-Tablero-720x478.jpg",
+            "alt": "Panel IoT", 
+            "nombre": "Panel de control IoT" 
+        },
+        { 
+            "src": "https://www.vanguardia.com/resizer/v2/oygukygfiu858257420230803172821jpg-WI7HRQMV7JHURPWWZOGHLYAQII.jpg?auth=533a63ad7d18f18038651678c61e1f2dc663e6f4b08791099d70d543d9e7f105&smart=true&width=1200&height=800&quality=70",
+            "alt": "Tanque inteligente",
+            "nombre": "Tanque inteligente" 
+        },
+        { 
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKhz9M9tnfyZA9IiOMMwEsaYKJIHc1tl6VazjCwg0O08UHQ3GIwcSbP9k&s=10",
+            "alt": "Supervision tecnica",
+            "nombre": "Supervision tecnica" 
+        }
     ]
     return {"respuesta": respuesta}
 
