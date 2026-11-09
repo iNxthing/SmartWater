@@ -60,7 +60,7 @@ class LoginRequest(BaseModel):
     password: str
 
 
-TOKEN_LIFETIME_MINUTES = 60
+TOKEN_LIFETIME_MINUTES = 5
 bearer_scheme = HTTPBearer(auto_error=False)
 
 
