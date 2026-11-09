@@ -39,9 +39,12 @@ export default {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       })
         .then(response => {
-          this.items = response.data.respuesta ?? [];
-          console.log("Respuesta", response.data.status)
-          console.log(this.items);
+          if (response.data.status) {
+            this.items = response.data.respuesta ?? [];
+          } else {
+            console.error('Error en la respuesta:', response.data)
+            this.items = []
+          }
         })
         .catch(e => {
           console.error('Error al cargar las imagenes de la galeria',e)

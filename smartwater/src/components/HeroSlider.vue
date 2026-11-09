@@ -55,8 +55,12 @@ export default {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       })
       .then(response => {
-        this.slides = response.data.respuesta ?? [];
-        console.log(this.slides);
+        if (response.data.status) {
+          this.slides = response.data.respuesta ?? [];
+        } else {
+          console.error('Error en la respuesta:', response.data)
+          this.slides = []
+        }
       })
       .catch(e => {
         console.error('Error al cargar las imágenes del slider:', e)

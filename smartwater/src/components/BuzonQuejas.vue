@@ -83,17 +83,23 @@ export default {
           headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
         })
       .then(response => {
-        this.mensaje = response.data.Mensaje
-        this.tipoMensaje = 'exito'
+        if (response.data.status) {
+          this.mensaje = response.data.Mensaje
+          this.tipoMensaje = 'exito'
 
-        this.nombre = ''
-        this.correo = ''
-        this.queja = ''
+          this.nombre = ''
+          this.correo = ''
+          this.queja = ''
 
-        setTimeout(() => {
-          this.mensaje = ''
-          this.tipoMensaje = ''
-        }, 5000)
+          setTimeout(() => {
+            this.mensaje = ''
+            this.tipoMensaje = ''
+          }, 5000)
+        } else {
+          console.error('Error en la respuesta:', response.data)
+          this.mensaje = response.data.detail || 'No fue posible registrar su queja en este momento.'
+          this.tipoMensaje = 'error'
+        }
       })
       .catch(err => {
         if (err.response?.status === 401) {

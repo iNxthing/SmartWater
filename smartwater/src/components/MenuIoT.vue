@@ -40,8 +40,12 @@ export default {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       })
         .then(response => {
-          this.cards = response.data.respuesta ?? [];
-          console.log(this.cards);
+          if (response.data.status) {
+            this.cards = response.data.respuesta ?? [];
+          } else {
+            console.error('Error en la respuesta:', response.data)
+            this.cards = []
+          }
         })
         .catch(e => {
         console.error('Error al cargar las imagenes del menu IOT',e)

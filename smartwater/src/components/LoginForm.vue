@@ -37,16 +37,16 @@ export default {
                 username: this.username,
                 password: this.password
             }).then(response => {
-                if (response.data.access_token) {
+                if (response.data.status) {
                     localStorage.setItem('token', response.data.access_token);
                     this.$router.push('/smartwater');
                 } else {
-                    this.errorMessage = 'No fue posible iniciar sesion.';
+                    this.errorMessage = response.data.detail || 'No fue posible iniciar sesion.';
                 }
             }).catch(error => {
                 if (error.response && error.response.status === 401) {
                     localStorage.removeItem('token')
-                    this.errorMessage = 'Credenciales incorrectas.';
+                    this.errorMessage = error.response.data?.detail || 'Credenciales incorrectas.';
                 } else {
                     this.errorMessage = 'No fue posible iniciar sesion. Intentelo de nuevo.';
                 }

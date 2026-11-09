@@ -54,7 +54,13 @@
           headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
         })
         .then(response => {
-          this.sugerencias = response.data.respuesta ?? [];
+          if (response.data.status) {
+            this.sugerencias = response.data.respuesta ?? [];
+          } else {
+            console.error('Error en la respuesta:', response.data)
+            this.sugerencias = []
+            this.error = response.data.detail || 'No fue posible cargar las sugerencias en este momento.'
+          }
         })
         .catch(err => {
           if (err.response?.status === 401) {
