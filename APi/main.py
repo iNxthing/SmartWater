@@ -4,8 +4,10 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 
 import jwt
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
 
@@ -17,6 +19,32 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(_: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "status": False,
+            "status_code": exc.status_code,
+            "detail": exc.detail,
+        },
+        headers=exc.headers,
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(_: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "status": False,
+            "status_code": status.HTTP_422_UNPROCESSABLE_ENTITY,
+            "detail": exc.errors(),
+        },
+    )
+
 
 sugerencias = []
 
@@ -111,14 +139,16 @@ app.add_middleware(
 )
 
 
-@app.get("/")
+@app.get("/", status_code=status.HTTP_200_OK)
 def home():
     return {
-        "Mensaje": "Hola"
+        "status": True,
+        "status_code": status.HTTP_200_OK,
+        "Mensaje": "Hola",
     }
 
 
-@app.post("/login")
+@app.post("/login", status_code=status.HTTP_200_OK)
 def login(datos: LoginRequest):
     username, password, secret_key = get_auth_settings()
     valid_username = hmac.compare_digest(
@@ -142,14 +172,16 @@ def login(datos: LoginRequest):
         algorithm="HS256",
     )
     return {
+        "status": True,
+        "status_code": status.HTTP_200_OK,
         "access_token": access_token,
         "token_type": "bearer",
         "expires_in": expires_in,
     }
 
 
-@app.get("/ImagenesSlider")
-def imagenes_slider():
+@app.get("/ImagenesSlider", status_code=status.HTTP_200_OK)
+def imagenes_slider(_: str = Depends(require_valid_token)):
     respuesta = [
 
         { 
@@ -174,11 +206,15 @@ def imagenes_slider():
         }
         
     ]
-    return {"respuesta": respuesta}
+    return {
+        "status": True,
+        "status_code": status.HTTP_200_OK,
+        "respuesta": respuesta,
+    }
 
 
-@app.get("/ImagenesGaleria")
-def imagenes_galeria():
+@app.get("/ImagenesGaleria", status_code=status.HTTP_200_OK)
+def imagenes_galeria(_: str = Depends(require_valid_token)):
     respuesta = [
         
         { 
@@ -207,11 +243,15 @@ def imagenes_galeria():
             "nombre": "Supervision tecnica" 
         }
     ]
-    return {"respuesta": respuesta}
+    return {
+        "status": True,
+        "status_code": status.HTTP_200_OK,
+        "respuesta": respuesta,
+    }
 
 
-@app.get("/ImagenesIOT")
-def imagenes_iot():
+@app.get("/ImagenesIOT", status_code=status.HTTP_200_OK)
+def imagenes_iot(_: str = Depends(require_valid_token)):
     respuesta = [
         {
           "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxhyVaxGAP1M9qb9x19hEZcKHEwWHueBmHV4i0Cud6Jvh8JaYAx_YSeZU&s=10",
@@ -244,10 +284,13 @@ def imagenes_iot():
     ]
 
     return {
-        "respuesta" : respuesta
+        "status": True,
+        "status_code": status.HTTP_200_OK,
+        "respuesta": respuesta,
     }
 
-@app.post("/guardarSugerencia")
+
+@app.post("/guardarSugerencia", status_code=status.HTTP_201_CREATED)
 def guardar_sugerencia(
     datos: sugerencia, _: str = Depends(require_valid_token)
 ):
@@ -260,10 +303,17 @@ def guardar_sugerencia(
     }
     sugerencias.append(nueva)
     return {
+        "status": True,
+        "status_code": status.HTTP_201_CREATED,
         "Mensaje": "Sugerencia enviada con exito",
-        "Sugerencia": nueva
+        "Sugerencia": nueva,
     }
 
-@app.get("/obtenerSugerencias")
+
+@app.get("/obtenerSugerencias", status_code=status.HTTP_200_OK)
 def obtener_sugerencias(_: str = Depends(require_valid_token)):
-    return {"respuesta": sugerencias}
+    return {
+        "status": True,
+        "status_code": status.HTTP_200_OK,
+        "respuesta": sugerencias,
+    }
