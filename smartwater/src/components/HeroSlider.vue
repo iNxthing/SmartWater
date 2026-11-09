@@ -48,6 +48,7 @@ export default {
     this.clearSlider()
   },
   methods: {
+    
     getAllImages: async function (){
       this.loadingImages = true;
       await this.axios 

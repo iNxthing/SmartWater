@@ -9,6 +9,7 @@
         <li><a href="#menu" @click.prevent="scrollTo('menu')">Menu IoT</a></li>
         <li><a href="#ubicacion" @click.prevent="scrollTo('ubicacion')">Donde Nos Encuentran</a></li>
         <li><a href="#mision" @click.prevent="scrollTo('mision')">Nuestra Mision</a></li>
+        <li class="cerrar" @click="cerrarSesion">Cerrar Sesion</li>
       </ul>
     </nav>
   </header>
@@ -32,6 +33,10 @@ export default {
         el.scrollIntoView({ behavior: 'smooth' })
       }
       this.menuOpen = false
+    },
+    cerrarSesion() {
+      localStorage.removeItem('token');
+      this.$router.push('/');
     }
   }
 }
@@ -95,7 +100,12 @@ nav {
 .nav-links a:hover::after {
   width: 100%;
 }
-
+.cerrar:hover {
+  cursor: pointer;
+  color: #ff4d4d;
+  font-weight: bold;
+  transition: 0.3s;
+}
 .menu-toggle {
   display: none;
   font-size: 1.2rem;

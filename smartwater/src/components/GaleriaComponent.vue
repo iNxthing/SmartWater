@@ -33,6 +33,7 @@ export default {
     }
   },
   methods: {
+    
     getAllImages: async function(){
       this.loadingImages = true;
       await this.axios.get('https://apismartwater.onrender.com/ImagenesGaleria',{
@@ -65,6 +66,7 @@ export default {
       }
       return `Sin respuesta del servidor: ${error.message}`
     },
+   
   },
   created(){
     this.getAllImages();

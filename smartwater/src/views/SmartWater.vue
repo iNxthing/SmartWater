@@ -15,11 +15,33 @@
 </template>
 
 <script>
-
 export default {
     components: {
         
     },
+  methods: {
+    estaAutorizado: async function(){
+      try {
+        await this.axios.get('https://apismartwater.onrender.com/ImagenesSlider',{
+          headers: { Authorization: 'bearer ' + localStorage.getItem('token') }
+        });
+        // Respuesta 2xx: el token es válido, no hay nada que hacer.
+      } catch (error) {
+        const status = error.response?.status;
+        if (status === 401 || status === 403) {
+          alert('Su sesión ha expirado o no tiene autorización para acceder a esta sección. Por favor, inicie sesión nuevamente.');
+          localStorage.removeItem('token');
+          this.$router.push('/');
+        }
+      }
+    },
+    borarToken(){
+      localStorage.removeItem('token');
+    }
+  },
+  created(){
+    this.estaAutorizado(); 
+  }
 };
 
 </script>
