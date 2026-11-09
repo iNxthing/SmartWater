@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import API_BASE_URL from '../api'
 
 export default {
   name: 'GaleriaComponent',
@@ -36,9 +35,12 @@ export default {
   methods: {
     getAllImages: async function(){
       this.loadingImages = true;
-      await this.axios.get(`${API_BASE_URL}/ImagenesGaleria`)
+      await this.axios.get('https://apismartwater.onrender.com/ImagenesGaleria',{
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      })
         .then(response => {
           this.items = response.data.respuesta ?? [];
+          console.log("Respuesta", response.data.status)
           console.log(this.items);
         })
         .catch(e => {
@@ -53,7 +55,13 @@ export default {
     }, 
     mostrarInfo(alt) {
       alert('Infraestructura desplegada: ' + alt + '. SmartWater monitorea fugas y niveles en tiempo real.')
-    }
+    },
+    getErrorMessage(error) {
+      if (error.response) {
+          return `Error ${error.response.status}: ${error.response.data?.error || 'Error del servidor'}`
+      }
+      return `Sin respuesta del servidor: ${error.message}`
+    },
   },
   created(){
     this.getAllImages();

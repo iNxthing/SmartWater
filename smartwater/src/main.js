@@ -12,7 +12,7 @@ import UbicacionComponent from './components/UbicacionComponent.vue';
 import GaleriaComponent from './components/GaleriaComponent.vue';
 import MisionComponent from './components/MisionComponent.vue';
 import MenuIoT from './components/MenuIoT.vue';
-
+import NavbarAdmin from './components/NavbarAdmin.vue';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import Skeleton from 'primevue/skeleton';
@@ -47,6 +47,7 @@ app.component("QuienesSomos",QuienesSomos);
 app.component("UbicacionComponent",UbicacionComponent);
 app.component("LoginForm",LoginForm);
 app.component("SkeletonPrime", Skeleton);
+app.component("NavbarAdmin",NavbarAdmin);
 
 
 

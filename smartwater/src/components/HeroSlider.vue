@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import API_BASE_URL from '../api'
 
 export default {
   name: 'HeroSlider',
@@ -52,7 +51,9 @@ export default {
     getAllImages: async function (){
       this.loadingImages = true;
       await this.axios 
-      .get(`${API_BASE_URL}/ImagenesSlider`)
+      .get('https://apismartwater.onrender.com/ImagenesSlider',{
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      })
       .then(response => {
         this.slides = response.data.respuesta ?? [];
         console.log(this.slides);

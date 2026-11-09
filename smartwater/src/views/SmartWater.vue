@@ -8,7 +8,6 @@
             <GaleriaComponent />
             <UbicacionComponent />
             <BuzonQuejas />
-            <MostrarSugerencia />
             <MisionComponent />
         </main>
     <FooterBar />
@@ -33,6 +32,8 @@ export default {
     padding: 0;
     overflow-x: hidden;
     background: #000000;
+    display: flex;
+    flex-direction: column;
 }
 
 .container main {
@@ -40,6 +41,7 @@ export default {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0;
+    flex: 1;
 }
 
 @media (max-width: 780px) {

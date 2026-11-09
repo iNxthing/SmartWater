@@ -20,11 +20,12 @@ export default {
 
 <style scoped>
 footer {
+  width: 100%;
   background: #0a2e2b;
   color: #d9f0ea;
   text-align: center;
   padding: 2rem;
-  margin-top: 2rem;
+  margin-top: auto;
 }
 
 .footer-content {

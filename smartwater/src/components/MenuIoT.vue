@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import API_BASE_URL from '../api'
 
 export default {
   name: 'MenuIoT',
@@ -37,7 +36,9 @@ export default {
     getAllImages: async function(){
 
       this.loadingIOT = true;
-      await this.axios.get(`${API_BASE_URL}/ImagenesIOT`)
+      await this.axios.get('https://apismartwater.onrender.com/ImagenesIOT',{
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      })
         .then(response => {
           this.cards = response.data.respuesta ?? [];
           console.log(this.cards);

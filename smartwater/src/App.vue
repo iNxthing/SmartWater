@@ -28,12 +28,15 @@ body {
 .container {
   min-height: 100vh;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .container main {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
+  flex: 1;
 }
 
 .container main > section {
